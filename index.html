@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melik Ayberk Türkeli - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #121212;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --accent: #00f5ff;
+            --accent-hover: #00d4e6;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .language-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 2rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .language-toggle span {
+            cursor: pointer;
+            transition: color 0.3s ease;
+            user-select: none;
+        }
+
+        .language-toggle span.active {
+            color: var(--accent);
+        }
+
+        .language-toggle span:not(.active):hover {
+            color: var(--text-primary);
+        }
+
+        .language-separator {
+            color: var(--text-secondary);
+            opacity: 0.5;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 245, 255, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(0, 245, 255, 0.1) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        .scroll-indicator::before {
+            content: '↓';
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            margin: 1rem auto 0;
+        }
+
+        /* About Section */
+        .about-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px rgba(0, 245, 255, 0.2);
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .project-btn:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-icon:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--bg-primary);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 5%;
+            }
+
+            nav {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 100%;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--glass-border);
+                transition: right 0.3s ease;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            .language-toggle {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 4rem 5%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo">MAT</a>
+        <nav id="nav">
+            <a href="#hakkimda" data-tr="Hakkımda" data-en="About">Hakkımda</a>
+            <a href="#projeler" data-tr="Projeler" data-en="Projects">Projeler</a>
+            <a href="#iletisim" data-tr="İletişim" data-en="Contact">İletişim</a>
+            <div class="language-toggle">
+                <span class="active" id="lang-tr" data-lang="tr">TR</span>
+                <span class="language-separator">|</span>
+                <span id="lang-en" data-lang="en">EN</span>
+            </div>
+        </nav>
+        <button class="mobile-menu-toggle" id="menuToggle">☰</button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <h1 data-tr="Merhaba, Ben Ayberk." data-en="Hello, I'm Ayberk.">Merhaba, Ben Ayberk.</h1>
+            <p data-tr="Elektrik-Elektronik Mühendisliği Öğrencisi & Vibe Coder" data-en="Electrical-Electronics Engineering Student & Vibe Coder">Elektrik-Elektronik Mühendisliği Öğrencisi & Vibe Coder</p>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- Hakkımda Section -->
+    <section id="hakkimda">
+        <h2 class="section-title" data-tr="Hakkımda" data-en="About">Hakkımda</h2>
+        <div class="about-content">
+            <p data-tr="Elektrik-Elektronik Mühendisliği öğrencisi olarak teknoloji dünyasında sürekli öğrenen ve gelişen biriyim. Yazılım geliştirme, elektronik tasarım ve yenilikçi projeler üzerinde çalışmayı seviyorum. Öğrendiklerimi pratiğe dökerek anlamlı çözümler üretmeye odaklanıyorum." data-en="As an Electrical-Electronics Engineering student, I am someone who continuously learns and grows in the world of technology. I love working on software development, electronic design, and innovative projects. I focus on putting what I learn into practice to create meaningful solutions.">
+                Elektrik-Elektronik Mühendisliği öğrencisi olarak teknoloji dünyasında sürekli öğrenen ve gelişen biriyim. 
+                Yazılım geliştirme, elektronik tasarım ve yenilikçi projeler üzerinde çalışmayı seviyorum. 
+                Öğrendiklerimi pratiğe dökerek anlamlı çözümler üretmeye odaklanıyorum.
+            </p>
+        </div>
+    </section>
+
+    <!-- Projeler Section -->
+    <section id="projeler">
+        <h2 class="section-title" data-tr="Projeler" data-en="Projects">Projeler</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3 data-tr="Proje 1" data-en="Project 1">Proje 1</h3>
+                <p data-tr="Bu proje, modern web teknolojileri kullanılarak geliştirilmiş bir uygulamadır. Kullanıcı deneyimini ön planda tutarak tasarlanmıştır." data-en="This project is an application developed using modern web technologies. It has been designed with a focus on user experience.">
+                    Bu proje, modern web teknolojileri kullanılarak geliştirilmiş bir uygulamadır. 
+                    Kullanıcı deneyimini ön planda tutarak tasarlanmıştır.
+                </p>
+                <a href="#" class="project-btn" data-tr="İncele" data-en="View">İncele</a>
+            </div>
+            <div class="project-card">
+                <h3 data-tr="Proje 2" data-en="Project 2">Proje 2</h3>
+                <p data-tr="Elektronik ve yazılımın birleştiği bu proje, günlük hayatta kullanılabilir pratik bir çözüm sunmaktadır." data-en="This project, which combines electronics and software, offers a practical solution that can be used in daily life.">
+                    Elektronik ve yazılımın birleştiği bu proje, günlük hayatta kullanılabilir 
+                    pratik bir çözüm sunmaktadır.
+                </p>
+                <a href="#" class="project-btn" data-tr="İncele" data-en="View">İncele</a>
+            </div>
+            <div class="project-card">
+                <h3 data-tr="Proje 3" data-en="Project 3">Proje 3</h3>
+                <p data-tr="Yenilikçi yaklaşımlarla geliştirilmiş bu proje, teknolojinin sınırlarını zorlayarak yeni perspektifler sunmaktadır." data-en="This project, developed with innovative approaches, offers new perspectives by pushing the boundaries of technology.">
+                    Yenilikçi yaklaşımlarla geliştirilmiş bu proje, teknolojinin sınırlarını 
+                    zorlayarak yeni perspektifler sunmaktadır.
+                </p>
+                <a href="#" class="project-btn" data-tr="İncele" data-en="View">İncele</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="iletisim">
+        <div class="footer-content">
+            <p class="footer-text">© 2026 Melik Ayberk Türkeli</p>
+            <div class="social-icons">
+                <a href="#" class="social-icon" aria-label="GitHub">⚫</a>
+                <a href="#" class="social-icon" aria-label="LinkedIn">⚫</a>
+                <a href="#" class="social-icon" aria-label="Twitter">⚫</a>
+                <a href="#" class="social-icon" aria-label="Email">⚫</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language Management
+        let currentLanguage = 'tr'; // Default language
+
+        // Language toggle functionality
+        const langTr = document.getElementById('lang-tr');
+        const langEn = document.getElementById('lang-en');
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update active language indicator
+            langTr.classList.toggle('active', lang === 'tr');
+            langEn.classList.toggle('active', lang === 'en');
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Update all elements with data-tr and data-en attributes
+            document.querySelectorAll('[data-tr][data-en]').forEach(element => {
+                const text = lang === 'tr' ? element.getAttribute('data-tr') : element.getAttribute('data-en');
+                element.textContent = text;
+            });
+            
+            // Save language preference to localStorage
+            localStorage.setItem('language', lang);
+        }
+
+        // Language toggle event listeners
+        langTr.addEventListener('click', () => switchLanguage('tr'));
+        langEn.addEventListener('click', () => switchLanguage('en'));
+
+        // Load saved language preference on page load
+        const savedLanguage = localStorage.getItem('language');
+        if (savedLanguage && (savedLanguage === 'tr' || savedLanguage === 'en')) {
+            switchLanguage(savedLanguage);
+        }
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('nav');
+
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background on scroll
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            const header = document.querySelector('header');
+            
+            if (currentScroll > 100) {
+                header.style.background = 'rgba(18, 18, 18, 0.95)';
+            } else {
+                header.style.background = 'rgba(18, 18, 18, 0.8)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>
