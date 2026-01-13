@@ -264,6 +264,7 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
+            align-items: start;
         }
 
         .project-card {
@@ -271,21 +272,173 @@
             backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s ease;
+            padding: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
             cursor: pointer;
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
             border-color: var(--accent);
             box-shadow: 0 10px 40px rgba(0, 245, 255, 0.2);
         }
 
+        .project-card-header {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .project-wave-visual {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.1) 0%, rgba(0, 245, 255, 0.05) 100%);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem;
+        }
+
+        .equalizer-bar {
+            width: 12px;
+            background: var(--accent);
+            border-radius: 10px;
+            height: 100%;
+            /* critical lines for GPU optimization: */
+            transform-origin: center; 
+            transform: scaleY(0.15); /* starting height */
+            will-change: transform; 
+            
+            animation: equalizerPulse 3.8s ease-in-out infinite;
+        }
+
+        /* random delay for 10 bars */
+        /* prime and fractional numbers for total chaos */
+        .equalizer-bar:nth-child(1)  { animation-duration: 2.11s; animation-delay: -0.45s; }
+        .equalizer-bar:nth-child(2)  { animation-duration: 3.23s; animation-delay: -1.13s; }
+        .equalizer-bar:nth-child(3)  { animation-duration: 2.57s; animation-delay: -2.67s; }
+        .equalizer-bar:nth-child(4)  { animation-duration: 3.41s; animation-delay: -0.89s; }
+        .equalizer-bar:nth-child(5)  { animation-duration: 2.33s; animation-delay: -3.01s; }
+        .equalizer-bar:nth-child(6)  { animation-duration: 3.17s; animation-delay: -1.55s; }
+        .equalizer-bar:nth-child(7)  { animation-duration: 2.69s; animation-delay: -0.62s; }
+        .equalizer-bar:nth-child(8)  { animation-duration: 3.53s; animation-delay: -2.18s; }
+        .equalizer-bar:nth-child(9)  { animation-duration: 2.87s; animation-delay: -1.84s; }
+        .equalizer-bar:nth-child(10) { animation-duration: 2.19s; animation-delay: -0.21s; }
+        
+
+        @keyframes equalizerPulse {
+            0%   { transform: scaleY(0.15); opacity: 0.6; filter: brightness(1); }
+            20%  { transform: scaleY(0.50); opacity: 0.8; filter: brightness(1); }
+            40%  { transform: scaleY(0.30); opacity: 0.7; filter: brightness(1); }
+            50%  { transform: scaleY(0.90); opacity: 1.0; filter: brightness(1.3); } /* peak */
+            60%  { transform: scaleY(0.55); opacity: 0.8; filter: brightness(1); }
+            80%  { transform: scaleY(0.25); opacity: 0.7; filter: brightness(1); }
+            100% { transform: scaleY(0.15); opacity: 0.6; filter: brightness(1); }
+        }
+
         .project-card h3 {
             font-size: 1.5rem;
-            margin-bottom: 1rem;
+            margin: 0;
             color: var(--text-primary);
+        }
+
+        .project-card-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--accent);
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .project-card-toggle-icon {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.2rem;
+        }
+
+        .project-card.expanded .project-card-toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .project-card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+            padding: 0 2rem;
+        }
+
+        .project-card.expanded .project-card-content {
+            max-height: 2000px;
+            padding: 0 2rem 2rem 2rem;
+        }
+
+        .project-card-content-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .project-card-content-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .project-card-content-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 15px;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .project-card-content-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.1) 0%, rgba(0, 245, 255, 0.05) 100%);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wave-visual {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            opacity: 0.4;
+            color: var(--accent);
+        }
+
+        .wave-visual::before {
+            content: '🌊';
+            filter: grayscale(100%) brightness(300%);
         }
 
         .project-card p {
@@ -294,9 +447,17 @@
             line-height: 1.6;
         }
 
+        .project-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
         .project-btn {
-            display: inline-block;
-            padding: 0.75rem 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
             background: transparent;
             border: 2px solid var(--accent);
             color: var(--accent);
@@ -304,12 +465,32 @@
             border-radius: 30px;
             font-weight: 500;
             transition: all 0.3s ease;
+            flex: 1;
+            min-width: 140px;
+            justify-content: center;
         }
 
         .project-btn:hover {
             background: var(--accent);
             color: var(--bg-primary);
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
+        }
+
+        .project-btn-icon {
+            font-size: 1.1rem;
+        }
+
+        .project-view-btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        button.project-btn {
+            border: 2px solid var(--accent);
+            background: transparent;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
         }
 
         /* Footer */
@@ -406,6 +587,26 @@
                 grid-template-columns: 1fr;
             }
 
+            .project-buttons {
+                flex-direction: column;
+            }
+
+            .project-btn {
+                min-width: 100%;
+            }
+
+            .project-card-content-buttons {
+                flex-direction: column;
+            }
+
+            .project-card-content-buttons .project-btn {
+                min-width: 100%;
+            }
+
+            .project-wave-visual {
+                height: 100px;
+            }
+
             section {
                 padding: 4rem 5%;
             }
@@ -465,13 +666,50 @@
     <section id="projeler">
         <h2 class="section-title" data-tr="Projeler" data-en="Projects">Projeler</h2>
         <div class="projects-grid">
-            <div class="project-card">
-                <h3 data-tr="Proje 1" data-en="Project 1">Proje 1</h3>
-                <p data-tr="Bu proje, modern web teknolojileri kullanılarak geliştirilmiş bir uygulamadır. Kullanıcı deneyimini ön planda tutarak tasarlanmıştır." data-en="This project is an application developed using modern web technologies. It has been designed with a focus on user experience.">
-                    Bu proje, modern web teknolojileri kullanılarak geliştirilmiş bir uygulamadır. 
-                    Kullanıcı deneyimini ön planda tutarak tasarlanmıştır.
-                </p>
-                <a href="#" class="project-btn" data-tr="İncele" data-en="View">İncele</a>
+            <div class="project-card" onclick="toggleCard(this)">
+                <div class="project-card-header">
+                    <div class="project-wave-visual">
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                    </div>
+                    <h3 data-tr="Digital Voice Codec: LPC" data-en="Digital Voice Codec: LPC">Digital Voice Codec: LPC</h3>
+                    <div class="project-card-toggle">
+                        <span data-tr="İncele" data-en="View Details">İncele</span>
+                        <span class="project-card-toggle-icon">↓</span>
+                    </div>
+                </div>
+                <div class="project-card-content">
+                    <div class="project-card-content-inner">
+                        <div class="project-card-content-tags">
+                            <span class="project-tag">DSP</span>
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Speech Processing</span>
+                        </div>
+                        <div class="project-card-content-description">
+                            <p data-tr="İnsan sesi üretimini (Source-Filter model) simüle eden ve ses sinyallerini yüksek oranda sıkıştıran Lineer Öngörülü Kodlama (LPC) algoritması tasarımı ve Python implementasyonu." data-en="Implementation of Linear Predictive Coding (LPC) algorithm to model human speech production. A signal processing project focusing on voice analysis and compression using Python.">
+                                İnsan sesi üretimini (Source-Filter model) simüle eden ve ses sinyallerini yüksek oranda sıkıştıran Lineer Öngörülü Kodlama (LPC) algoritması tasarımı ve Python implementasyonu.
+                            </p>
+                        </div>
+                        <div class="project-card-content-buttons">
+                            <a href="lpc_report.pdf" class="project-btn" target="_blank">
+                                <span class="project-btn-icon">📄</span>
+                                <span data-tr="Raporu Oku" data-en="Read Report">Raporu Oku</span>
+                            </a>
+                            <a href="https://github.com/maturkeli/lpc-speech-coding" class="project-btn" target="_blank">
+                                <span class="project-btn-icon">⚫</span>
+                                <span data-tr="Kaynak Kod" data-en="Source Code">Kaynak Kod</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="project-card">
                 <h3 data-tr="Proje 2" data-en="Project 2">Proje 2</h3>
@@ -586,6 +824,18 @@
             }
             
             lastScroll = currentScroll;
+        });
+
+        // Accordion Card Toggle
+        function toggleCard(card) {
+            card.classList.toggle('expanded');
+        }
+
+        // Prevent card toggle when clicking on buttons/links inside
+        document.querySelectorAll('.project-card-content a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
         });
     </script>
 </body>
