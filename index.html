@@ -711,14 +711,61 @@
                     </div>
                 </div>
             </div>
-            <div class="project-card">
-                <h3 data-tr="Proje 2" data-en="Project 2">Proje 2</h3>
-                <p data-tr="Elektronik ve yazılımın birleştiği bu proje, günlük hayatta kullanılabilir pratik bir çözüm sunmaktadır." data-en="This project, which combines electronics and software, offers a practical solution that can be used in daily life.">
-                    Elektronik ve yazılımın birleştiği bu proje, günlük hayatta kullanılabilir 
-                    pratik bir çözüm sunmaktadır.
-                </p>
-                <a href="#" class="project-btn" data-tr="İncele" data-en="View">İncele</a>
+            <div class="project-card" onclick="toggleCard(this)">
+                <div class="project-card-header">
+                    <div class="project-wave-visual">
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                    </div>
+                    
+                    <h3 data-tr="Real-Time Voice Chat App" data-en="Real-Time Voice Chat App">Real-Time Voice Chat App</h3>
+                    
+                    <div class="project-card-toggle">
+                        <span data-tr="İncele" data-en="View Details">İncele</span>
+                        <span class="project-card-toggle-icon">↓</span>
+                    </div>
+                </div>
+
+                <div class="project-card-content">
+                    <div class="project-card-content-inner">
+                        <div class="project-card-content-tags">
+                            <span class="project-tag">WebRTC</span>
+                            <span class="project-tag">Socket.io</span>
+                            <span class="project-tag">Node.js</span>
+                            <span class="project-tag">Web Audio API</span>
+                        </div>
+
+                        <div class="project-card-content-description">
+                            <p data-tr="Düşük gecikmeli ses iletişimi sağlayan, oda tabanlı (room-based) bir sesli sohbet uygulaması. Web Audio API kullanılarak gerçek zamanlı frekans analizi (FFT) yapılır ve ses dalgaları görselleştirilir. Socket.io ile anlık durum yönetimi, PeerJS ile P2P ses aktarımı sağlanmıştır." 
+                               data-en="A room-based voice chat application providing low-latency audio communication. Real-time frequency analysis (FFT) is performed using Web Audio API to visualize sound waves. Instant state management via Socket.io and P2P audio transfer via PeerJS.">
+                                Düşük gecikmeli ses iletişimi sağlayan, oda tabanlı (room-based) bir sesli sohbet uygulaması. 
+                                Web Audio API kullanılarak gerçek zamanlı frekans analizi (FFT) yapılır ve ses dalgaları görselleştirilir.
+                            </p>
+                        </div>
+
+                        <div class="project-card-content-buttons">
+                            <a href="https://live-voice-chat.onrender.com" class="project-btn" target="_blank">
+                                <span class="project-btn-icon">🚀</span>
+                                <span data-tr="Canlı Demo" data-en="Live Demo">Canlı Demo</span>
+                            </a>
+                            
+                            <a href="#" class="project-btn" target="_blank">
+                                <span class="project-btn-icon">⚫</span>
+                                <span data-tr="Kaynak Kod" data-en="Source Code">Kaynak Kod</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
+           
             <div class="project-card">
                 <h3 data-tr="Proje 3" data-en="Project 3">Proje 3</h3>
                 <p data-tr="Yenilikçi yaklaşımlarla geliştirilmiş bu proje, teknolojinin sınırlarını zorlayarak yeni perspektifler sunmaktadır." data-en="This project, developed with innovative approaches, offers new perspectives by pushing the boundaries of technology.">
